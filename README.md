@@ -14,6 +14,10 @@
 
 ## 一、算法的架构组成
 
+![](./img/zong.png)
+
+首先拿出无人驾驶系统架构
+
 ### 1.感知层
 
 * 感知层使用的算法是fast-lio2
@@ -44,10 +48,11 @@
 
 #### 行为规划
 
-local_planner
+行为规划一般是自己写的决策
 
 #### 运动规划
 
+local_planner
 pathFollower
 
 #### 行为规划和运动规划放在一起说
@@ -172,10 +177,6 @@ ros::Subscriber subSpeed = nh.subscribe<std_msgs::Float32> ("/speed", 5, speedHa
 * /way_point & /goal_point：/way_point用于local_planner的航路点（目标点），localplanner中的目标点其实还有方向，所以不是很建议用这个目标点，应该用/goal_point，但是有一点可圈可点的是：/way_point航路点寻迹的时候如果路径被阻塞，不会全局改变路径。这个可以简单利用一下
 
 ## 五、整体运行流程
-
-![](./img/zong.png)
-
-首先拿出无人驾驶系统架构
 
 首先使用pkg `livox_ros_driver2`驱动MID360发布点云数据（"/livox/lidar"）和imu数据（"/livox/imu"），这些数据由感知层（fast_lio）订阅并处理。
 
