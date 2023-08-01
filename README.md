@@ -29,8 +29,8 @@
 ### 2.规划层
 
 * 任务规划使用的算法是far_planner
-* 行为规划和运动规划使用的算法是autonomous_exploration_development_environment
-* 注意：行为规划和运动规划算法实车部署的时候，起作用的是里面的内置算法[ground_based_autonomy_basic](https://github.com/jizhang-cmu/ground_based_autonomy_basic)，autonomous_exploration_development_environment实际上是一个仿真平台。用起来更方便
+* 运动规划使用的算法是autonomous_exploration_development_environment
+* 注意：运动规划算法实车部署的时候，起作用的是里面的内置算法[ground_based_autonomy_basic](https://github.com/jizhang-cmu/ground_based_autonomy_basic)，autonomous_exploration_development_environment实际上是一个仿真平台。用起来更方便
 
 ### 3.控制层
 
