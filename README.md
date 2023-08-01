@@ -55,7 +55,7 @@
 local_planner
 pathFollower
 
-#### 行为规划和运动规划放在一起说
+#### 运动规划放在一起说
 
 在开源代码autonomous_exploration_development_environment中，有以下pkg
 
@@ -82,7 +82,7 @@ pathFollower
 
 ****
 
-​	**3.为行为规划和运动规划的主要代码**，其中，local_planner作为局部路径规划器，通过MATLAB生成了小车的所有可行驶路径：在rviz中可视为车身（雷达）坐标系周围的一圈或者一部分圆弧的黄色路径，路径和matlab源码存储在该pkg下的paths目录中，可通过更改变量`scale`来改变实际车体的半径（不是很确定）。local_planner中订阅了一个名为`/way_point`的话题，此话题为航路点，也就是小车局部规划的目标点。他的来源为上层规划算法far_planner发送，自己发送，或者使用rviz+官方的way_point插件，它适用于短距离的避障等行为，far_planner的goal_point更适用于远距离的整体规划。然后通过航路点，地形分析等各种条件local会计算出最优路径通过发布话题`/path`的行为将最优路径发送到path_follower上，path_follower会使用类似pid控制算法的形式计算出跟随该路径需要的x y yaw的速度，并且通过话题`/cmd_vel`发布，想要根据雷达，路径规划控制小车移动，可以订阅该消息。
+​	**3.为运动规划的主要代码**，其中，local_planner作为局部路径规划器，通过MATLAB生成了小车的所有可行驶路径：在rviz中可视为车身（雷达）坐标系周围的一圈或者一部分圆弧的黄色路径，路径和matlab源码存储在该pkg下的paths目录中，可通过更改变量`scale`来改变实际车体的半径（不是很确定）。local_planner中订阅了一个名为`/way_point`的话题，此话题为航路点，也就是小车局部规划的目标点。他的来源为上层规划算法far_planner发送，自己发送，或者使用rviz+官方的way_point插件，它适用于短距离的避障等行为，far_planner的goal_point更适用于远距离的整体规划。然后通过航路点，地形分析等各种条件local会计算出最优路径通过发布话题`/path`的行为将最优路径发送到path_follower上，path_follower会使用类似pid控制算法的形式计算出跟随该路径需要的x y yaw的速度，并且通过话题`/cmd_vel`发布，想要根据雷达，路径规划控制小车移动，可以订阅该消息。
 
 ****
 
@@ -112,7 +112,7 @@ pathFollower
 
 ### 规划层
 
-规划层调参时主要集中在local_planner的launch文件和terrain_analysis文件中
+规划层调参时主要集中在local_planner的launch文件和terrain_analysis的launch文件中
 
 在**local_planner.launch**中（不一定对）
 
