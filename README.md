@@ -112,6 +112,8 @@ pathFollower
 
 ## 三、关于调参
 
+**调参建议先去[autonomous_exploration_development_environment](https://github.com/HongbiaoZ/autonomous_exploration_development_environment)CV一份原始参数**
+
 ### 感知层
 
 如果是室内使用fast_lio，可以参考一下https://github.com/hku-mars/FAST_LIO/issues/169
