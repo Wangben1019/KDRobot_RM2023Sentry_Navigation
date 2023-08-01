@@ -1,0 +1,10 @@
+<launch>
+    <node pkg="demo_reconfigure_user" type="temp_solve_user" name="temp_solve_user" output="screen" >
+        <param name="Navigation_Mode" type="bool" value="true" />
+        <param name="Patrol_Mode" type="bool" value="false" />
+        <param name="Rotate_Mode" type="bool" value="false" />
+        <param name="Counterattack_Mode" type="bool" value="false" />
+    </node>
+
+    <node pkg="rqt_reconfigure" type="rqt_reconfigure" name="rqt_reconfigure" output="screen" />
+</launch>

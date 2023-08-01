@@ -1,0 +1,12 @@
+<launch>
+    <include file="$(find livox_ros_driver2)/launch/msg_MID360.launch" />
+
+    <include file="$(find fast_lio)/launch/mapping_mid360.launch" />
+
+    <!-- <include file="$(find vehicle_simulator)/launch/system_real_robot.launch" />  -->
+
+    <!-- <include file="$(find far_planner)/launch/far_planner.launch" />  -->
+
+    <!-- <node pkg="user_package" type="control_chassis" name="control_chassis" output="screen" />  -->
+
+</launch>

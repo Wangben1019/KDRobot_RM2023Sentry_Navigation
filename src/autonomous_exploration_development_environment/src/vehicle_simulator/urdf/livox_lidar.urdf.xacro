@@ -1,0 +1,10 @@
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="example">
+
+  <xacro:include filename="$(find livox_laser_simulation)/urdf/my_head.urdf.xacro"/>
+  <xacro:include filename="$(find livox_laser_simulation)/urdf/platform.urdf.xacro"/>
+  <xacro:include filename="$(find livox_laser_simulation)/urdf/livox_mid360.urdf.xacro"/>
+  <!-- <xacro:include filename="$(find livox_laser_simulation)/urdf/livox_horizon.urdf.xacro"/> -->
+  <!-- <xacro:include filename="$(find livox_laser_simulation)/urdf/livox_mini360.urdf.xacro"/> -->
+  <!-- <xacro:include filename="$(find livox_laser_simulation)/urdf/multi_horizon.urdf.xacro"/> -->
+
+</robot>
