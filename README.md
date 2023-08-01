@@ -24,7 +24,7 @@
 
 需要重点强调一下的就是规划层的任务规划和运动规划。其中任务规划属于是一个大范围低分辨率的路径规划，它能够规划从车体到goal-point的整体路径，他的主要作用是纵观全局的去做规划，当无人车走到死角的时候能够及时的重新规划一条路径，并将整体路径分成小部分距离无人车近的路径，发布话题给运动规划。运动规划属于是一个小范围高分辨率的路径规划，他的主要作用是小范围的导航，但是他包含了避障等功能
 
-* **非常建议搭配论文食用，论文是同名的，我翻译了一下，各位爷移步[我的另一个仓库](https://github.com/Wangben1019/-Autonomous-Exploration-Development-Environment-and-the-Planning-Algorithms) PS:这是一个类似文档的论文，没有复杂的理论以及数学公式，小白也能看懂**
+* **规划层的部分非常建议搭配论文食用，论文是同名的，我翻译了一下，看不惯英文的各位爷移步[我的另一个仓库](https://github.com/Wangben1019/-Autonomous-Exploration-Development-Environment-and-the-Planning-Algorithms) PS:这是一个类似文档的论文，没有复杂的理论以及数学公式，小白也能看懂**
 
 ### 1.感知层
 
