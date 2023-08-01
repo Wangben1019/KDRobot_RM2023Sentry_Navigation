@@ -25,7 +25,7 @@
 * [far_planner](https://github.com/MichaelFYang/far_planner)
 * [livox_ros_driver](https://github.com/Livox-SDK/livox_ros_driver)      **注意安装SDK**
 * [livox_ros_driver2](https://github.com/Livox-SDK/livox_ros_driver2)    **注意安装SDK**
-* [tear_planner](https://github.com/caochao39/tare_planner)   **此处用不上，他是和far_planner算法处在同一层，两个应用场景，一个是探索位置环境，一个是做路径规划**
+* [tear_planner](https://github.com/caochao39/tare_planner)   **此处用不上，他是和far_planner算法处在同一层，两个应用场景，一个是探索未知环境，一个是做路径规划**
 
 ## 一、算法的架构组成
 
