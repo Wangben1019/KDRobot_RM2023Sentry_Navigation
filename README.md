@@ -16,6 +16,15 @@
 
 首先学习哨兵底盘算法之前建议了解一下无人驾驶系统的架构
 
+## 零、写在前面
+本项目更多的提供一个很多开源的整合框架。其中包含了大量作者在学习阶段乱写的注释笔记等。建议直接去各个仓库自己克隆拼凑
+* [fast_lio](https://github.com/hku-mars/FAST_LIO)   **注意它包含了子模块**
+* [autonomous_exploration_development_environment](https://github.com/HongbiaoZ/autonomous_exploration_development_environment)
+* [far_planner](https://github.com/MichaelFYang/far_planner)
+* [livox_ros_driver](https://github.com/Livox-SDK/livox_ros_driver)      **注意安装SDK**
+* [livox_ros_driver2](https://github.com/Livox-SDK/livox_ros_driver2)    **注意安装SDK**
+* [tear_planner](https://github.com/caochao39/tare_planner)   **此处用不上，他是和far_planner算法处在同一层，两个应用场景，一个是探索位置环境，一个是做路径规划**
+
 ## 一、算法的架构组成
 
 ![](./img/zong.png)
