@@ -56,7 +56,7 @@
 
 ### 感知层
 
-感知层只用了fastlio，地图话题为`/cloud_registered`，里程计话题为`/Odometry`
+感知层只用了fastlio，地图话题为`/cloud_registered`，里程计话题为`/Odometry`（23.9.14：前几天从群里看到大佬说fastlio没有建图，挖个坑以后补一补）
 
 ### 规划层
 
