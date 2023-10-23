@@ -128,7 +128,7 @@ catkin_make
 
 2. 在Livox的上位机中进行测试
 
-   1. [下载链接（Ctrl + 左键蓝字部分即可下载）](https://terra-1-g.djicdn.com/65c028cd298f4669a7f0e40e50ba1131/Mid360/LivoxViewer2%20for%20Ubuntu%20v2.3.0.zip)
+   1. [下载链接（左键蓝字部分即可下载）](https://terra-1-g.djicdn.com/65c028cd298f4669a7f0e40e50ba1131/Mid360/LivoxViewer2%20for%20Ubuntu%20v2.3.0.zip)
 
    2. 解压压缩包并运行上位机
 
