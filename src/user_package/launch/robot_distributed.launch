@@ -7,6 +7,6 @@
 
     <include file="$(find far_planner)/launch/far_planner_distributed.launch" />
 
-    <node pkg="user_package" type="control_chassis" name="control_chassis" output="screen" /> 
+    
 
 </launch>

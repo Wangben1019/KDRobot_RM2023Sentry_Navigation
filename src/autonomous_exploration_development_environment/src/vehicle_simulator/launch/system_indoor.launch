@@ -7,7 +7,7 @@
   <arg name="vehicleY" default="0"/>
   <arg name="terrainZ" default="0"/>
   <arg name="vehicleYaw" default="0"/>
-  <arg name="gazebo_gui" default="false"/>
+  <arg name="gazebo_gui" default="true"/>
   <arg name="checkTerrainConn" default="false"/>
 
   <include file="$(find ps3joy)/launch/ps3.launch" />

@@ -1,0 +1,7 @@
+<launch>
+
+    <include file="$(find fast_lio)/launch/ces.launch" />
+
+    <include file="$(find vehicle_simulator)/launch/rviz_debug.launch" />
+
+</launch>

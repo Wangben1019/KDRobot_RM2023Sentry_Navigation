@@ -8,6 +8,8 @@
 
 * **学习时间很短加之本人水平有限，请各位大佬发现问题不吝赐教**
 
+* **由于项目自己在维护，而且写文档的时候已经好久没有机会实操了，所以说可能有的地方是有问题的，所以说如果哪里写的不对还希望佬们联系我指正，谢谢了**
+
 * **有批评问题欢迎各位佬联系QQ：2782760102**
 
 * **user_package软件包下的package.xml，为了不让各位使用它报错，建议删除他或者是删除整个user_package，他对整个开源项目是没有帮助的**
@@ -27,7 +29,180 @@
 * [livox_ros_driver2](https://github.com/Livox-SDK/livox_ros_driver2)    **注意安装SDK**
 * [tear_planner](https://github.com/caochao39/tare_planner)   **此处用不上，他是和far_planner算法处在同一层，两个应用场景，一个是探索未知环境，一个是做路径规划**
 
-## 一、算法的架构组成
+## 一、框架的使用
+
+### 1.1 框架的使用注意事项
+
+​		由于本框架决策层由于时间原因未经过测试，pkg中`user_package`中决策部分代码并无参考意义。除此之外该功能包剩余的功能只为订阅话题`cmd_vel`与stm32进行通信。其中通信部分代码为[另外一个仓库中的内容](https://github.com/LX050724/KdrobotCppLibs)。使用时可以使用自己队伍内的PC与单片机通信框架进行更改。具体步骤为：1.删除pkg`user_package`。2.创建新的功能包并编译通信lib。3.订阅话题`cmd_vel`发送`x，y，yaw`三轴期望速度发送至单片机即可使用。
+
+### 1.2 安装livoxSDK
+
+* [Livox-SDK](https://github.com/Livox-SDK/Livox-SDK)
+
+* [Livox-SDK2](https://github.com/Livox-SDK/Livox-SDK2)
+
+**按照官方给的文档编译安装即可**
+
+### 1.3 编译
+
+* 使用开源中使用的通信lib（不推荐，需要编译Qt）
+
+```shell
+sudo apt update
+sudo apt install gcc	# 安装gcc QT依赖，一般系统会有的
+sudo apt install g++	# 安装g++ QT依赖，一般系统会有的
+sudo apt install make	# 安装make QT依赖，一般系统会有的
+sudo snap install cmake --classic	# 安装cmake
+sudo apt-get install build-essential	# 安装Qt5的组件
+sudo apt install libusb-dev	# 安装usb驱动，autonomous_exploration_development_environment需要
+sudo apt install libqt5serialport5-dev	# 安装qt5serial，通信框架需要
+sudo apt install sudo apt-get install qt5*	# 安装QT5
+
+git clone https://github.com/LX050724/KdrobotCppLibs
+cd KdrobotCppLibs
+rm -r modules/Realsense_Util/
+mkdir build
+cd build
+cmake ..
+make -j8
+sudo make install
+```
+
+```shell
+# 添加环境变量到profile
+export PATH=/usr/local/KdrobotCppLibs/bin/Release${PATH:+:${PATH}}
+export CMAKE_PREFIX_PATH=/usr/local/KdrobotCppLibs/lib/Release/cmake${CMAKE_PREFIX_PATH:+:${CMAKE_PREFIX_PATH}}
+# 刷新环境变量
+```
+
+```shell
+git clone https://github.com/Wangben1019/KDRobot_RM2023Sentry_Navigation.git
+cd KDRobot_RM2023Sentry_Navigation
+catkin_make
+# 注意！！！到这里可能会有报错，别慌，看1.4！
+```
+
+
+
+**总之，我由于电控转行算法，对各种各样的操作不是很懂，所以说使用这个框架会造成很多很多麻烦，所以说不建议，主要是有些错误不会解决，嗯，我是废物。。。。**
+
+* 不使用开源中的通信lib（强烈推荐）
+
+```shell
+sudo apt update
+sudo apt install libusb-dev
+
+git clone https://github.com/Wangben1019/KDRobot_RM2023Sentry_Navigation.git
+cd KDRobot_RM2023Sentry_Navigation
+rm -r src/user_package/  # 不用就删掉咯
+catkin_make
+# 注意！！！到这里可能会有报错，别慌，看1.4！
+```
+
+### 1.4 编译过程中意料之内的小错误
+
+#### 1.4.1 报错1：编译缺少livox_ros_driver/CustomMsg.h，一般由fast-lio报错
+
+​		**这是因为CustomMsg.h是livox_ros_driver编译后生成的.h文件，需要首先编译livox_ros_driver**
+
+​		**解决方法：`catkin_make -DCATKIN_WHITELIST_PACKAGES="livox_ros_driver"`**
+
+#### 1.4.2 报错2：缺少fast_lio/Pose6D.h
+
+​		**这是很抽象的编译顺序造成的（我才是多核编译造成的，本人才疏学浅，不懂）**
+
+​		**解决方法：报错之后重复编译（即：再次运行`catkin_make`）即可**
+
+#### 1.4.3 BUG1：解决1.4.1中问题后，如果直接运行`catkin_make`，仍会只编译livox_ros_driver
+
+​		**解决方法：`catkin_make -DCATKIN_WHITELIST_PACKAGES=""`**
+
+## 二、Livox雷达的使用。以mid360为例
+
+**从解决其他学校好兄弟问题的经验来讲，不能用虚拟机，不能用虚拟机，不能用虚拟机。一般涉及物理接口的虚拟机都会出很多奇奇怪怪的问题**
+
+1. 首先修改网络设置
+
+修改有线配置为手动，设置IP，雷达如果没有设置更改过IP一般默认为`192.168.1.50`，同时子网掩码也要设置好
+![](./img/wang1.png)
+
+2. 在Livox的上位机中进行测试
+
+   1. [下载链接（Ctrl + 左键蓝字部分即可下载）](https://terra-1-g.djicdn.com/65c028cd298f4669a7f0e40e50ba1131/Mid360/LivoxViewer2%20for%20Ubuntu%20v2.3.0.zip)
+
+   2. 解压压缩包并运行上位机
+
+      ```shell
+      unzip LivoxViewer2\ for\ Ubuntu\ v2.3.0.zip 
+      cd cd LivoxViewer2\ for\ Ubuntu\ v2.3.0/
+      ./LivoxViewer2.sh  # 如果没有可执行权限记得加权限，或者右键属性/权限也可以勾选
+      ```
+
+   3. 如果不出意外的话是可以运行的，如果没有效果，查看一下右上角的IP看看是不是设置好的IP
+   4. **尽量这一步测试没有问题之后在进行下一步**
+
+3. 通过livox_ros_driver2驱动mid360发布点云
+
+   1. 修改`livox_ros_driver2/config/MID360_config.json`文件
+
+   **修改部分为host_net_info（下文已经修改好）以及lidar_configs中的ip为：198.168.1.1xx，其中xx为雷达二维码SN码后两位（具体可以看手册）**
+
+   ```json
+   {
+     "lidar_summary_info" : {
+       "lidar_type": 8
+     },
+     "MID360": {
+       "lidar_net_info" : {
+         "cmd_data_port": 56100,
+         "push_msg_port": 56200,
+         "point_data_port": 56300,
+         "imu_data_port": 56400,
+         "log_data_port": 56500
+       },
+       "host_net_info" : {
+         "cmd_data_ip" : "192.168.1.50",
+         "cmd_data_port": 56101,
+         "push_msg_ip": "192.168.1.50",
+         "push_msg_port": 56201,
+         "point_data_ip": "192.168.1.50",
+         "point_data_port": 56301,
+         "imu_data_ip" : "192.168.1.50",
+         "imu_data_port": 56401,
+         "log_data_ip" : "",
+         "log_data_port": 56501
+       }
+     },
+     "lidar_configs" : [
+       {
+         "ip" : "192.168.1.182",
+         "pcl_data_type" : 1,
+         "pattern_mode" : 0,
+         "extrinsic_parameter" : {
+           "roll": 0.0,
+           "pitch": 0.0,
+           "yaw": 0.0,
+           "x": 0,
+           "y": 0,
+           "z": 0
+         }
+       }
+     ]
+   }
+   
+   
+   ```
+
+   2. 尝试运行livox_ros_driver2
+
+   ```shell
+   # 运行以下语句查看rivz中是否存在点云
+   roslaunch livox_ros_driver2 rviz_MID360.launch
+   ```
+
+   
+
+## 三、框架的组成
 
 ![](./img/zong.png)
 
@@ -52,7 +227,7 @@
 
 * 发送x y yaw指令到单片机执行。
 
-## 二、算法中的部分pkg的作用
+## 四、架构中的部分pkg的作用
 
 ### 感知层
 
@@ -124,7 +299,7 @@ pathFollower
 
 ​	**8，9，10，11等均为仿真所用的pkg**，能用就行
 
-## 三、关于调参
+## 五、关于调参
 
 **调参建议先去[autonomous_exploration_development_environment](https://github.com/HongbiaoZ/autonomous_exploration_development_environment)CV一份原始参数**
 
@@ -153,7 +328,7 @@ pathFollower
 
 * vehicleHeight：雷达安装高度
 
-## 四、关于一些话题
+## 六、关于一些话题
 
 * /stop：在pathFollower.cpp中有以下源码
 
@@ -198,7 +373,7 @@ ros::Subscriber subSpeed = nh.subscribe<std_msgs::Float32> ("/speed", 5, speedHa
 * /cmd_vel：控制话题，包含了X Y Yaw三轴期望速度，订阅后直接做用于底盘期望速度
 * /way_point & /goal_point：/way_point用于local_planner的航路点（目标点），localplanner中的目标点其实还有方向，所以不是很建议用这个目标点，应该用/goal_point，但是有一点可圈可点的是：/way_point航路点寻迹的时候如果路径被阻塞，不会全局改变路径。这个可以简单利用一下
 
-## 五、整体运行流程
+## 七、整体运行流程
 
 首先使用pkg `livox_ros_driver2`驱动MID360发布点云数据（"/livox/lidar"）和imu数据（"/livox/imu"），这些数据由感知层（fast_lio）订阅并处理。
 

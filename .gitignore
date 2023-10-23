@@ -3,3 +3,8 @@
 /devel
 .vscode
 .cache
+src/autonomous_exploration_development_environment/src/vehicle_simulator/mesh/campus
+src/autonomous_exploration_development_environment/src/vehicle_simulator/mesh/forest
+src/autonomous_exploration_development_environment/src/vehicle_simulator/mesh/garage
+src/autonomous_exploration_development_environment/src/vehicle_simulator/mesh/indoor
+src/autonomous_exploration_development_environment/src/vehicle_simulator/mesh/tunnel

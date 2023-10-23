@@ -37,8 +37,11 @@ find_package(Qt5Network)
 # #spdlog
 find_package(spdlog)
 
+set(loggerFactory_DIR /usr/local/KdrobotCppLibs/lib/cmake/loggerFactory)
 find_package(loggerFactory)
+set(Qt_Util_DIR /usr/local/KdrobotCppLibs/lib/cmake/Qt_Util)
 find_package(Qt_Util)
+set(VCOMCOMM_DIR /usr/local/KdrobotCppLibs/lib/cmake/VCOMCOMM)
 find_package(VCOMCOMM)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
