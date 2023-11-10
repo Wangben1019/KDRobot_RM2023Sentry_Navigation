@@ -56,7 +56,7 @@ sudo snap install cmake --classic	# 安装cmake
 sudo apt-get install build-essential	# 安装Qt5的组件
 sudo apt install libusb-dev	# 安装usb驱动，autonomous_exploration_development_environment需要
 sudo apt install libqt5serialport5-dev	# 安装qt5serial，通信框架需要
-sudo apt install sudo apt-get install qt5*	# 安装QT5
+sudo apt-get install qt5*	# 安装QT5
 
 git clone https://github.com/LX050724/KdrobotCppLibs
 cd KdrobotCppLibs
