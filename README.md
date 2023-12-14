@@ -313,6 +313,7 @@ pathFollower
 
 在**local_planner.launch**中（不一定对）
 
+* 很重要，去[ground_based_autonomy_basic](https://github.com/jizhang-cmu/ground_based_autonomy_basic)的README中查看**Changing robot size**，以适配自己的无人车！！！！
 * sensorOffsetX、sensorOffsetY：为传感器在X、Y轴上相对于车体中心点的偏移
 * twoWayDrive：双向驱动：就是车体能不能反向走（倒车）
 * maxSpeed：X、Y轴的最大速度
