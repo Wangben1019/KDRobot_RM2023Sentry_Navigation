@@ -94,7 +94,7 @@ sudo apt install libusb-dev
 
 git clone https://github.com/Wangben1019/KDRobot_RM2023Sentry_Navigation.git
 cd KDRobot_RM2023Sentry_Navigation
-rm -r src/user_package/  # 不用就删掉咯
+rm -r src/user_package/  # 不用就删掉咯，但是user_package中仍存在启动整个框架的launch文件，可以借鉴。
 catkin_make
 # 注意！！！到这里可能会有报错，别慌，看1.4！
 ```
